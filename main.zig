@@ -10,6 +10,7 @@ pub fn main() !void {
     defer alloc.free(fileContents);
     var reader = std.io.Reader.fixed(fileContents);
     while (true) {
-        const line = reader.takeDelimiterInclusive('\n') catch break;
+        const line = reader.takeDelimiterExclusive('\n') catch break;
+        _ = try reader.discard(@enumFromInt(1));
     }
 }
